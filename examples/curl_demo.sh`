@@ -31,3 +31,16 @@ curl -X POST "$BASE_URL/tables/network-routes/load" \
       }
     ]
   }'
+
+echo
+echo "[demo] Listing rows..."
+curl "$BASE_URL/tables/network-routes?limit=10"
+echo
+
+echo "[demo] Trying N-SQL query..."
+curl -X POST "$BASE_URL/query/nsql" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "query": "SELECT device, tower_id, latency_ms, signal_quality FROM network.routes WHERE g_layer = '\''5G'\'' AND signal_quality > 0.9;"
+  }'
+echo
