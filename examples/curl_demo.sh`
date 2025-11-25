@@ -1,0 +1,33 @@
+```bash
+#!/usr/bin/env bash
+
+set -e
+
+BASE_URL=${BASE_URL:-http://127.0.0.1:8000}
+
+echo "[demo] Loading demo rows into network.routes..."
+
+curl -X POST "$BASE_URL/tables/network-routes/load" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "rows": [
+      {
+        "device": "0xA4C1",
+        "channel": "Delta.Freq(42)",
+        "tower_id": "TWR-001",
+        "frequency": 3600.0,
+        "g_layer": "5G",
+        "latency_ms": 31.8,
+        "signal_quality": 0.92
+      },
+      {
+        "device": "0xB7F2",
+        "channel": "Delta.Freq(42)",
+        "tower_id": "TWR-002",
+        "frequency": 1800.0,
+        "g_layer": "4G",
+        "latency_ms": 55.4,
+        "signal_quality": 0.81
+      }
+    ]
+  }'
